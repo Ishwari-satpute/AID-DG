@@ -1,4 +1,4 @@
-name: CD Deploy to VPS (SCP) 
+name: CD Deploy to VPS
 
 on:
   push:
@@ -16,8 +16,8 @@ jobs:
       - name: Copy files to VPS
         uses: appleboy/scp-action@v0.1.7
         with:
-          host: 82.112.238.89
-          username: root
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS }}
-          source: "."
-          target: "/var/www/html"
+          source: .
+          target: /var/www/html
