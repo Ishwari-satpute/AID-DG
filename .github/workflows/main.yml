@@ -1,4 +1,4 @@
-name: CD Deploy to VPS
+name: CD Deploy to VPS (SCP)
 
 on:
   push:
@@ -17,16 +17,7 @@ jobs:
         uses: appleboy/scp-action@v0.1.7
         with:
           host: 82.112.238.89
-          username: ${{ secrets.VPS_USER }}
+          username: root
           key: ${{ secrets.VPS }}
           source: "."
           target: "/var/www/html"
-
-      - name: Restart Nginx
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: 82.112.238.89
-          username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS }}
-          script: |
-            sudo systemctl restart nginx
